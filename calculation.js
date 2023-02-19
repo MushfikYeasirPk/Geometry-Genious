@@ -24,51 +24,61 @@ function calcuData(cardInputFiled1, cardInputFiled2) {
 
 }
 
+
 // ###############################################################
-function calForTriRec(InputFiled1, InputFiled2) {
+function calForTriRec(InputFiled1, InputFiled2, shape) {
+ 
     const cardValue1 = document.getElementById(InputFiled1).value
-    cardValue1.value=''
-    if (isNaN(cardValue1) || cardValue1=='') {
+    const cardValue2 = document.getElementById(InputFiled2).value
+
+    if (isNaN(cardValue1) || cardValue1 == '' || isNaN(cardValue2) || cardValue2 == '') {
         alert('Please provide a number')
         return;
     }
-    
+    else {
 
+        const cardValueParse1 = parseFloat(cardValue1)
+        const cardValueParse2 = parseFloat(cardValue2)
+        if (shape == 'triangle') {
+            return .5 * cardValueParse1 * cardValueParse2
+        }
+        else if (shape == 'rectangle') {
 
-    const cardValueParse1 = parseFloat(cardValue1)
-    
-    const cardValue2 = document.getElementById(InputFiled2).value
-    cardValue2.value=''
-    if (isNaN(cardValue2) || cardValue2=='' ) {
-        alert('Please provide a number')
-        return
+            return cardValueParse1 * cardValueParse2
+        }
+       ]
     }
-    const cardValueParse2 = parseFloat(cardValue2)
-    
-    return cardValueTriRec= [cardValueParse1,cardValueParse2]
-
 
 }
-// ############### 1 Triangle Calculation ############
+// ############### 1 Triangle Calculation ############/  for card 1
 document.getElementById('card1').addEventListener("click", function () {
-    const card1Title = document.getElementById('card1Title').innerText
-    calForTriRec('card1w','card1I')
-    const card1Result2dig=.5 * cardValueTriRec[0] *cardValueTriRec[1]
-    serial += 1
-    displayData(card1Title, card1Result2dig)
-    let inputs=document.querySelectorAll('input')
-    inputs.forEach(input =>  input.value = '');
+    const card1Title = document.getElementById('card1Title').innerText  
+    const res = parseFloat(calForTriRec('card1w', 'card1I', 'triangle'))
+    console.log(res)
+    if (!isNaN(res)) {
+        serial += 1
+        displayData(card1Title, res)
+        let inputs = document.querySelectorAll('input')
+        inputs.forEach(input => input.value = '');
+        return
 
+    }
+  
 })
 // ############### 2 Rectangle Calculation ############
 document.getElementById('card2').addEventListener("click", function () {
     const card2Title = document.getElementById('card2Title').innerText
-    calForTriRec('card2b','card2I')
-    card2Result2dig=cardValueTriRec[0] *cardValueTriRec[1]
-     serial += 1
-    displayData(card2Title, card2Result2dig)
-    let inputs=document.querySelectorAll('input')
-    inputs.forEach(input =>  input.value = '');
+    const res = parseFloat(calForTriRec('card2b', 'card2I', 'rectangle'))
+
+    console.log(res)
+    if (!isNaN(res)) {
+        serial += 1
+        displayData(card2Title, res)
+        let inputs = document.querySelectorAll('input')
+        inputs.forEach(input => input.value = '');
+        return
+        
+    }
 
 })
 
